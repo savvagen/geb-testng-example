@@ -40,7 +40,7 @@ class GmailPage extends Page {
     @Step("Open Main page")
     GmailPage open(){
         browser.go url
-        browser.at GmailPage(forEmail: forEmail)
+        browser.at GmailPage
     }
 
     @Step("Logout")
