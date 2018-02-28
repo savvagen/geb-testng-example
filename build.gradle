@@ -1,0 +1,197 @@
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+
+defaultTasks 'clean', 'test'
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+configurations {
+    agent
+}
+
+
+ext {
+    // The drivers we want to use
+    drivers = ["firefox", "chrome"]
+
+    ext {
+        groovyVersion = '2.3.11'
+        gebVersion = '2.1'
+        seleniumVersion = '3.9.1'
+        allureVersion = '2.6.0'
+        chromeDriverVersion = '2.35'
+        geckoDriverVersion = '0.19.1'
+    }
+}
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    //TestNg for GEB
+    compile "org.gebish:geb-testng:$gebVersion"
+    //GEB framework
+    compile "org.gebish:geb-core:$gebVersion"
+    compile "org.gebish:geb-exceptions:$gebVersion"
+    compile "org.gebish:geb-gradle:$gebVersion"
+    compile "org.gebish:geb-manual:$gebVersion"
+    // If using Spock, need to depend on geb-spock
+    compile "org.gebish:geb-spock:$gebVersion"
+    compile("org.spockframework:spock-core:1.1-groovy-2.4") {
+        exclude group: "org.codehaus.groovy"
+    }
+    //Selenium
+    compile "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+    compile "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
+    compile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+    compile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+    //Helper libraries
+    compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '2.1.0'
+    compile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+    compile group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
+    //Allure
+    compile "io.qameta.allure:allure-testng:$allureVersion"
+    compile "io.qameta.allure:allure-spock:$allureVersion"
+    compile "io.qameta.allure:allure-assertj:$allureVersion"
+    //Logging
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.22'
+    compile group: 'com.codepine.api', name: 'testrail-api-java-client', version: '2.0.0'
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.2'
+    jarFile = './gradle/wrapper/gradle-wrapper.jar'
+}
+
+
+
+buildscript{
+    repositories{
+        jcenter()
+
+    }
+    dependencies{
+        classpath "io.qameta.allure:allure-gradle:2.3"
+    }
+}
+
+apply plugin: 'io.qameta.allure'
+
+
+allure {
+    autoconfigure = true
+    version = '2.6.0'
+    useTestNG {
+        version = "$allureVersion"
+    }
+    downloadLink = 'https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.6.0/allure-2.6.0.zip'
+
+}
+
+
+clean.doFirst {
+    delete "${rootDir}/.allure"
+    delete "${rootDir}/allure-results"
+    delete "${rootDir}/target"
+    delete "${rootDir}/build"
+    delete "${rootDir}/video"
+    delete "${rootDir}/out"
+    delete "${rootDir}/src/main/resources/logs/log_file.log"
+    delete "${rootDir}/src/main/resources/logs/test_log.log"
+    delete "${rootDir}/src/main/resources/logs/all_logs.log"
+    delete "${rootDir}/selenoid/video/*"
+}
+
+test{
+    systemProperty "log4j.configuration", "file:///path/to/log4j.properties"
+    systemProperties "geb.build.reportsDir": "$reportsDir/geb"
+    systemProperty "file.encoding", "utf-8"
+    useTestNG() {
+        //file("src/test/groovy/ui/SpokTests.groovy")
+        suiteXmlFiles << new File("src/test/resources/", "systemSuite.xml")
+    }
+}
+
+
+import io.qameta.allure.gradle.task.AllureReport
+
+task allureAggregatedReport(type: AllureReport) {
+    allure.resultsDir
+}
+
+test.finalizedBy allureAggregatedReport
+
+
+/*task chromeTest(type: Test){
+    systemProperty "geb.env", "chrome"
+    //In case drivers are physically located with the code
+    //systemProperty "webdriver.chrome.driver", "/drivers/chromedriver.exe"
+    useTestNG() {
+        file "src/test/groovy/LoginTests.groovy"
+        //suites "src/test/resources/suite.xml"
+        useDefaultListeners = true
+    }
+}*/
+
+drivers.each { driver ->
+    task "${driver}Test"(type: Test) {
+        systemProperty "geb.env", "${driver}"
+        systemProperties "geb.build.reportsDir": "$reportsDir/geb"
+        useTestNG() {
+            suiteXmlFiles << new File("src/test/resources/", "systemSuite.xml")
+        }
+    }
+}
+drivers.collect { tasks["${it}Test"].finalizedBy allureAggregatedReport }
+
+
+/*
+drivers.each { driver ->
+    task "${driver}AcceptanceTest"(type: Test) {
+        //systemProperty "geb.env", "${driver}"
+        //systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
+        systemProperty "testDriver", "${driver}"
+        systemProperty "test.single", "SpokTests.groovy"
+    }
+}
+drivers.collect { tasks["${it}AcceptanceTest"].finalizedBy allureAggregatedReport }
+*/
+
+
+
+
+task remoteTest(type: Test){
+    systemProperty "geb.env", "remote"
+    useTestNG() {
+        suiteXmlFiles << new File("src/test/resources/", "systemSuite.xml")
+        //suites "src/test/resources/systemSuite.xml"
+        useDefaultListeners = true
+    }
+}
+remoteTest.finalizedBy allureAggregatedReport
+
+
+
+//Test on all browsers
+/*test {
+    dependsOn drivers.collect { tasks["${it}Test"] }
+    enabled = false
+}*/
