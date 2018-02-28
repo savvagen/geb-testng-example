@@ -17,7 +17,6 @@ class LoginPage extends Page {
         passwordField(required: true, wait: 8) { $('input[type="password"]') }
         passwordSubmit { $("#passwordNext").click() }
         accountsForm { $("form[role='presentation']")}
-
         //Another implementation
         login {$("form").identifier()}
         password {$("form").password()}

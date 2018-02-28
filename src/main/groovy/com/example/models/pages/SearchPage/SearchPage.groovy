@@ -16,13 +16,11 @@ class SearchPage extends Page{
 
     static url = "/google.com"
 
-
     static content = {
         searchField(wait: 8, required: true) { $(By.name("q"))}
         searchResults{ module(SearchResults)}
         //Create element with parameter
         pElement {pName -> $("input", name: pName)}
-
     }
 
     @Step
