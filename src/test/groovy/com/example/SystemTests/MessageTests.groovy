@@ -24,7 +24,7 @@ class MessageTests extends TestBase{
 
 
     @Test
-    void messageTest1(){
+    void messageTest1() {
         Browser.drive {
             to LoginPage
             loginAs(testUser)
@@ -39,7 +39,6 @@ class MessageTests extends TestBase{
             assert messages[0].messageStart.text().contains("Hello Savva")
         }
     }
-
 
 
 
@@ -88,6 +87,7 @@ class MessageTests extends TestBase{
         assert mainPage.messages.get(0).subject.text() == "Test Message"
         assert mainPage.messages[0].messageStart.text().contains("Hello Savva")
     }
+
 
     @Test
     void messageTestWithFileUpload(){

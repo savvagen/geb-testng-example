@@ -9,6 +9,7 @@ import org.openqa.selenium.Keys
 class LoginPage extends Page {
 
     static atCheckWaiting = 10
+
     static url = "/accounts.google.com/signin/v2/identifier"
 
     static content = {
