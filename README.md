@@ -17,7 +17,7 @@ or
 ```
 
 ## How to run testing remotely
-1. First - run the Selenoid locally (or remotely) [folowing this guide]("https://github.com/savvagen/Selenoid-example")
+1. First - run the Selenoid locally (or remotely) [folowing this guide](href="https://github.com/savvagen/Selenoid-example")
 2. Run the testing using command after running of the Selenoid:
 ``` 
 ./gradlew remoteTest
