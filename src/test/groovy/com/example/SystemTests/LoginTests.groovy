@@ -5,8 +5,7 @@ import com.example.models.pages.AccountPage.AccountPage
 import geb.Browser
 import io.qameta.allure.Flaky
 import com.example.models.pages.LoginPage.LoginPage
-import com.example.models.pages.MainPage.GmailPage
-import com.example.models.users.User
+import com.example.models.pages.GmailPage.GmailPage
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 

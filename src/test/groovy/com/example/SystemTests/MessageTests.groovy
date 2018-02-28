@@ -6,7 +6,7 @@ import com.example.models.pages.AccountPage.AccountPage
 import com.example.models.users.User
 import geb.Browser
 import com.example.models.pages.LoginPage.LoginPage
-import com.example.models.pages.MainPage.GmailPage
+import com.example.models.pages.GmailPage.GmailPage
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Listeners
 import org.testng.annotations.Test
@@ -62,15 +62,17 @@ class MessageTests extends TestBase{
     @Test
     void messageTest3(){
         User user = new User()
-        AccountPage accountPage = loginPage.open().loginAs(user)
-        GmailPage mainPage = mainPage.open().writeMessage().with(user.getEmail(), 'Test Message', "Hello Savva")
+        AccountPage accountPage = to(new LoginPage()).loginAs(user)
+        GmailPage gmailPage = to(new GmailPage(forEmail: testUser.getEmail()))
+                .writeMessage()
+                .with(user.getEmail(), 'Test Message', "Hello Savva")
         browser.waitFor{
-            mainPage.successMessage.displayed
-            mainPage.successMessage.text() == "Письмо отправлено. Просмотреть сообщение"
+            gmailPage.successMessage.displayed
+            gmailPage.successMessage.text() == "Письмо отправлено. Просмотреть сообщение"
         }
         browser.getDriver().navigate().refresh()
-        assert mainPage.messages.get(0).subject.text() == "Test Message"
-        assert mainPage.messages[0].messageStart.text().contains("Hello Savva")
+        assert gmailPage.messages.get(0).subject.text() == "Test Message"
+        assert gmailPage.messages[0].messageStart.text().contains("Hello Savva")
     }
 
 
@@ -78,14 +80,14 @@ class MessageTests extends TestBase{
     void messageTest4(){
         User user = new User()
         loginPage.open().loginAs(user)
-        mainPage.open().writeMessage().with(user.getEmail(), 'Test Message', "Hello Savva")
+        gmailPage.open().writeMessage().with(user.getEmail(), 'Test Message', "Hello Savva")
         browser.waitFor{
-            mainPage.successMessage.displayed
-            mainPage.successMessage.text() == "Письмо отправлено. Просмотреть сообщение"
+            gmailPage.successMessage.displayed
+            gmailPage.successMessage.text() == "Письмо отправлено. Просмотреть сообщение"
         }
         browser.getDriver().navigate().refresh()
-        assert mainPage.messages.get(0).subject.text() == "Test Message"
-        assert mainPage.messages[0].messageStart.text().contains("Hello Savva")
+        assert gmailPage.messages.get(0).subject.text() == "Test Message"
+        assert gmailPage.messages[0].messageStart.text().contains("Hello Savva")
     }
 
 
@@ -94,19 +96,19 @@ class MessageTests extends TestBase{
         User user = new User()
         loginPage.open()
                 .loginAs(user)
-        mainPage.open()
+        gmailPage.open()
                 .writeMessage()
                 .withAttachment(user.getEmail(),
                 'Test Message',
                 "Hello Savva",
                 "src/main/groovy/com/example/data/HelloWorld.txt")
         browser.waitFor{
-            mainPage.successMessage.displayed
-            mainPage.successMessage.text() == "Письмо отправлено. Просмотреть сообщение"
+            gmailPage.successMessage.displayed
+            gmailPage.successMessage.text() == "Письмо отправлено. Просмотреть сообщение"
         }
         browser.getDriver().navigate().refresh()
-        assert mainPage.messages.get(0).subject.text() == "Test Message"
-        assert mainPage.messages[0].messageStart.text().contains("Hello Savva")
+        assert gmailPage.messages.get(0).subject.text() == "Test Message"
+        assert gmailPage.messages[0].messageStart.text().contains("Hello Savva")
     }
 
 

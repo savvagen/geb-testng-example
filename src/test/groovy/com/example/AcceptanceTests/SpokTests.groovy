@@ -3,7 +3,7 @@ package com.example.AcceptanceTests
 import com.example.models.pages.AccountPage.AccountPage
 import geb.spock.GebSpec
 import com.example.models.pages.LoginPage.LoginPage
-import com.example.models.pages.MainPage.GmailPage
+import com.example.models.pages.GmailPage.GmailPage
 import com.example.models.pages.SearchPage.SearchPage
 import com.example.models.users.User
 
