@@ -52,7 +52,7 @@ class SearchTests  extends TestBase{
      * TEST SAMPLES AND VARIANTS
      */
 
-    /*@Test
+    @Test
     void searchTest1(){
         Browser.drive {
             to SearchPage
@@ -62,7 +62,7 @@ class SearchTests  extends TestBase{
             assert searchResults.resultsList.each {element -> element.displayed}
             assert searchResults.results.each {element -> element.title.text().contains("Selenium")}
         }
-    }*/
+    }
 
 
     @Test

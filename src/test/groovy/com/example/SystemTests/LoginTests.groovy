@@ -77,24 +77,24 @@ class LoginTests extends TestBase {
      * TEST SAMPLES AND VARIANTS
      */
 
-    /*@Test
-  void loginTest1(){
-      Browser.drive {
-          to LoginPage
-          login("genchevskiy.test@gmail.com", "s.g19021992")
-          isAt MainPage
-          assert accountButton.isDisplayed()
-      }
-  }*/
+    @Test
+    void loginTest1(){
+        Browser.drive {
+            to LoginPage
+            login("genchevskiy.test@gmail.com", "s.g19021992")
+            isAt MainPage
+            assert accountButton.isDisplayed()
+        }
+    }
 
 
-    /*@Test
+    @Test
     void positiveLogin2(){
         to LoginPage
         login("genchevskiy.test@gmail.com", "s.g19021992")
         isAt AccountPage
         assert accountButton.displayed
-    }*/
+    }
 
 
     @Test
