@@ -1,22 +1,13 @@
 package com.example.SystemTests
 
 import com.example.TestBase
-import com.example.listeners.TestListener
 import com.example.models.pages.AccountPage.AccountPage
-import com.example.models.pages.SearchPage.SearchPage
 import geb.Browser
-import geb.testng.GebTestTrait
-import io.github.bonigarcia.wdm.ChromeDriverManager
 import io.qameta.allure.Flaky
-import org.omg.IOP.ENCODING_CDR_ENCAPS
-import org.openqa.selenium.Keys
 import com.example.models.pages.LoginPage.LoginPage
-import com.example.models.pages.MainPage.MainPage
+import com.example.models.pages.MainPage.GmailPage
 import com.example.models.users.User
-import org.openqa.selenium.chrome.ChromeDriver
 import org.testng.annotations.AfterMethod
-import org.testng.annotations.BeforeClass
-import org.testng.annotations.Listeners
 import org.testng.annotations.Test
 
 //@Listeners(TestListener.class)
@@ -37,14 +28,7 @@ class LoginTests extends TestBase {
     /**
      * EXAMPLES
      */
-
-    /*@Test
-    void  testExample(){
-        to LoginPage
-        AccountPage accountPage = loginWith("genchevskiy.test@gmail.com", "s.g19021992")
-        isAt AccountPage
-        assert accountPage.accountButton.displayed
-    }
+    /*
 
     @Test
     void testExample2(){
@@ -78,48 +62,50 @@ class LoginTests extends TestBase {
      */
 
     @Test
-    void loginTest1(){
-        Browser.drive {
-            to LoginPage
-            login("genchevskiy.test@gmail.com", "s.g19021992")
-            isAt MainPage
-            assert accountButton.isDisplayed()
-        }
-    }
-
-
-    @Test
-    void positiveLogin2(){
+    void  loginTest(){
         to LoginPage
-        login("genchevskiy.test@gmail.com", "s.g19021992")
+        loginWith(testUser.getEmail(), testUser.getPassword())
         isAt AccountPage
         assert accountButton.displayed
     }
 
+    @Test
+    void loginTest1(){
+        Browser.drive {
+            to LoginPage
+            login(testUser.getEmail(), testUser.getPassword())
+            isAt GmailPage
+            assert accountButton.isDisplayed()
+        }
+    }
+
+    @Test
+    void positiveLogin2(){
+        to LoginPage
+        login(testUser.getEmail(), testUser.getPassword())
+        isAt AccountPage
+        assert accountButton.displayed
+    }
 
     @Test
     void loginTest3(){
-        User user = new User()
         to LoginPage
-        loginAs(user)
+        loginAs(testUser)
         isAt AccountPage
         assert accountButton.isDisplayed()
     }
 
-
     @Test
     void loginTest4(){
-        User user = new User()
         LoginPage loginPage = browser.to LoginPage
-        AccountPage accountPage = loginPage.loginAs(user)
+        AccountPage accountPage = loginPage.loginAs(testUser)
         assert accountPage.accountButton.isDisplayed()
 
     }
 
     @Test
     void loginTest5(){
-        User user = new User()
-        AccountPage accountPage = loginPage.open().loginAs(user)
+        AccountPage accountPage = loginPage.open().loginAs(testUser)
         assert accountPage.accountButton.isDisplayed()
 
     }
@@ -127,8 +113,7 @@ class LoginTests extends TestBase {
     @Flaky
     @Test
     void loginTest6(){
-        User user = new User()
-        loginPage.open().loginAs(user)
+        loginPage.open().loginAs(testUser)
         assert accountPage.accountButton.isDisplayed()
 
     }

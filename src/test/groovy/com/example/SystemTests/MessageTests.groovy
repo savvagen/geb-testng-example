@@ -6,7 +6,7 @@ import com.example.models.pages.AccountPage.AccountPage
 import com.example.models.users.User
 import geb.Browser
 import com.example.models.pages.LoginPage.LoginPage
-import com.example.models.pages.MainPage.MainPage
+import com.example.models.pages.MainPage.GmailPage
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Listeners
 import org.testng.annotations.Test
@@ -26,11 +26,10 @@ class MessageTests extends TestBase{
     @Test
     void messageTest1(){
         Browser.drive {
-            User user = new User()
             to LoginPage
-            loginAs(user)
-            to MainPage
-            writeMessage().with(user.getEmail(), 'Test Message', "Hello Savva")
+            loginAs(testUser)
+            to(new GmailPage(forEmail: testUser.getEmail()))
+            writeMessage().with(testUser.getEmail(), 'Test Message', "Hello Savva")
             waitFor {
                 successMessage.displayed
                 successMessage.text() == "Письмо отправлено. Просмотреть сообщение"
@@ -47,9 +46,9 @@ class MessageTests extends TestBase{
     @Test
     void messageTest2(){
         to LoginPage
-        login("genchevskiy.test@gmail.com", "s.g19021992")
-        to MainPage
-        writeMessage().with("genchevskiy.test@gmail.com", 'Test Message', "Hello Savva")
+        login(testUser.getEmail(), testUser.getPassword())
+        to(new GmailPage(forEmail: testUser.getEmail()))
+        writeMessage().with(testUser.getEmail(), 'Test Message', "Hello Savva")
         waitFor {
             successMessage.displayed
             successMessage.text() == "Письмо отправлено. Просмотреть сообщение"
@@ -65,7 +64,7 @@ class MessageTests extends TestBase{
     void messageTest3(){
         User user = new User()
         AccountPage accountPage = loginPage.open().loginAs(user)
-        MainPage mainPage = mainPage.open().writeMessage().with(user.getEmail(), 'Test Message', "Hello Savva")
+        GmailPage mainPage = mainPage.open().writeMessage().with(user.getEmail(), 'Test Message', "Hello Savva")
         browser.waitFor{
             mainPage.successMessage.displayed
             mainPage.successMessage.text() == "Письмо отправлено. Просмотреть сообщение"

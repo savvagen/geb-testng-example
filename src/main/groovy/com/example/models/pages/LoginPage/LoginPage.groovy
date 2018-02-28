@@ -46,7 +46,7 @@ class LoginPage extends Page {
     }
 
 
-    // Привычная реализация Fluent объектов
+    // Fluent object realization
 
     @Step("Open Login page")
     LoginPage open(){

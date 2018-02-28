@@ -1,7 +1,7 @@
 package com.example.models.pages.MainPage.modules
 
 import geb.Module
-import com.example.models.pages.MainPage.MainPage
+import com.example.models.pages.MainPage.GmailPage
 import io.qameta.allure.Step
 import org.openqa.selenium.By
 import org.openqa.selenium.Keys
@@ -19,15 +19,15 @@ class MessageForm extends Module {
     }
 
     @Step("Write message")
-    MainPage with(String to, String subject, String message){
+    GmailPage with(String to, String subject, String message){
         addressField << to
         subjectField << subject << Keys.TAB
         messageField << message
         submitMessage
-        browser.at(MainPage)
+        browser.at(GmailPage)
     }
 
-    MainPage withAttachment(String to, String subject, String message, String filePath){
+    GmailPage withAttachment(String to, String subject, String message, String filePath){
         def attachment = new File(filePath)
         addressField << to
         subjectField << subject << Keys.TAB
@@ -35,7 +35,7 @@ class MessageForm extends Module {
         fileDataField = attachment.absolutePath
         waitFor {attachmens.first().parent().attr("aria-label").contains("Прикрепленный файл")}
         submitMessage
-        browser.at(MainPage)
+        browser.at(GmailPage)
     }
 
 }

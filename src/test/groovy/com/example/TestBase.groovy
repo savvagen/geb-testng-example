@@ -1,13 +1,12 @@
 package com.example
 
 import com.example.models.pages.AccountPage.AccountPage
+import com.example.models.users.User
 import geb.Browser
 import com.example.models.pages.LoginPage.LoginPage
-import com.example.models.pages.MainPage.MainPage
+import com.example.models.pages.MainPage.GmailPage
 import com.example.models.pages.SearchPage.SearchPage
 import geb.testng.GebTestTrait
-import io.github.bonigarcia.wdm.ChromeDriverManager
-import org.openqa.selenium.chrome.ChromeDriver
 import org.testng.annotations.AfterClass
 import org.testng.annotations.BeforeClass
 
@@ -15,13 +14,17 @@ class TestBase implements GebTestTrait{
 
     SearchPage searchPage
     LoginPage loginPage
-    MainPage mainPage
+    GmailPage mainPage
     AccountPage accountPage
     Browser browser
+
+    User testUser
 
 
     @BeforeClass
     void setUp(){
+        testUser = new User()
+
         //Create browser instance - variant - 1
         //ChromeDriverManager.getInstance().setup()
         //browser = new Browser(driver: new ChromeDriver())
@@ -32,10 +35,11 @@ class TestBase implements GebTestTrait{
         //browser = new Browser()
         //browser.driver = new ChromeDriver()
 
+
         browser = new Browser()
         searchPage = new SearchPage().init(browser)
         loginPage = new LoginPage().init(browser)
-        mainPage = new MainPage().init(browser)
+        mainPage = new GmailPage(forEmail: testUser.getEmail()).init(browser)
         accountPage = new AccountPage().init(browser)
 
         //Manual configuration

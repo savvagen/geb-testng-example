@@ -1,20 +1,7 @@
 package com.example.SystemTests
 
 import com.example.TestBase
-import com.example.listeners.TestListener
-import com.example.models.pages.AccountPage.AccountPage
-import com.example.models.pages.LoginPage.LoginPage
-import com.example.models.pages.MainPage.MainPage
 import geb.Browser
-import geb.testng.GebTestTrait
-import io.github.bonigarcia.wdm.ChromeDriverManager
-import org.junit.Before
-import org.openqa.selenium.By
-import org.openqa.selenium.Keys
-import org.openqa.selenium.chrome.ChromeDriver
-import org.testng.annotations.BeforeClass
-import org.testng.annotations.BeforeMethod
-import org.testng.annotations.Listeners
 import org.testng.annotations.Test
 import com.example.models.pages.SearchPage.SearchPage
 import static org.testng.Assert.*

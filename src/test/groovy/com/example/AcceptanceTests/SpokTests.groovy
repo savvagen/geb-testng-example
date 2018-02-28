@@ -3,14 +3,17 @@ package com.example.AcceptanceTests
 import com.example.models.pages.AccountPage.AccountPage
 import geb.spock.GebSpec
 import com.example.models.pages.LoginPage.LoginPage
-import com.example.models.pages.MainPage.MainPage
+import com.example.models.pages.MainPage.GmailPage
 import com.example.models.pages.SearchPage.SearchPage
 import com.example.models.users.User
 
 
 class SpokTests extends GebSpec {
 
+    static User user
+
     def setupSpec() {
+        user = new User()
         println 'base setupSpec()'
     }
 
@@ -27,6 +30,7 @@ class SpokTests extends GebSpec {
         go "https://accounts.google.com/Logout"
         driver.manage().deleteAllCookies()
     }
+
 
 
     def "user can search"(){
@@ -49,7 +53,6 @@ class SpokTests extends GebSpec {
 
     def "user can authorize"(){
         given:
-        User user = new User()
         to LoginPage
 
         when:
@@ -65,13 +68,15 @@ class SpokTests extends GebSpec {
 
     def "user can send the message"(){
         given:
-        User user = new User()
         to LoginPage
         loginAs(user)
-        to MainPage
+        to(new GmailPage(forEmail: user.getEmail()))
 
         when:
-        writeMessage().with(user.getEmail(), 'Test Message', "Hello Savva")
+        writeMessage().withAttachment(user.getEmail(),
+                'Test Message',
+                "Hello Savva",
+                "src/main/groovy/com/example/data/HelloWorld.txt")
 
         then:
         waitFor { successMessage.displayed }
