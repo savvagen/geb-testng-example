@@ -163,21 +163,6 @@ drivers.each { driver ->
 drivers.collect { tasks["${it}Test"].finalizedBy allureAggregatedReport }
 
 
-/*
-drivers.each { driver ->
-    task "${driver}AcceptanceTest"(type: Test) {
-        //systemProperty "geb.env", "${driver}"
-        //systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
-        systemProperty "testDriver", "${driver}"
-        systemProperty "test.single", "SpokTests.groovy"
-    }
-}
-drivers.collect { tasks["${it}AcceptanceTest"].finalizedBy allureAggregatedReport }
-*/
-
-
-
-
 task remoteTest(type: Test){
     systemProperty "geb.env", "remote"
     useTestNG() {

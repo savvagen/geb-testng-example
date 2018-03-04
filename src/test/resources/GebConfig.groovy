@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.Platform
 import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
@@ -41,7 +42,21 @@ environments {
         driver = {
             //WebDriverManager.chromedriver().version("2.3").setup()
             ChromeDriverManager.getInstance().setup()
-            def driverInstance = new ChromeDriver()
+
+            ChromeOptions options = new ChromeOptions()
+            Map<String, Object> prefs = new HashMap<String, Object>()
+            prefs.put("credentials_enable_service", false)
+            prefs.put("profile.password_manager_enabled", false)
+            options.setExperimentalOption("prefs", prefs)
+            options.addArguments("use-fake-device-for-media-stream")
+            options.addArguments("use-fake-ui-for-media-stream")
+            options.addArguments("--disable-notifications")
+            options.addArguments("--lang=es")
+            options.addArguments("--disable-confirmations")
+            options.addArguments("disable-infobars")
+            options.addArguments("window-size=1600,1200")
+
+            def driverInstance = new ChromeDriver(options)
             driverInstance.manage().window().maximize()
             driverInstance
         }
