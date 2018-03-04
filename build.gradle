@@ -44,6 +44,7 @@ repositories {
 
 dependencies {
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7.1'
     //TestNg for GEB
     compile "org.gebish:geb-testng:$gebVersion"
     //GEB framework
