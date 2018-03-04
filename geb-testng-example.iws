@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="275d972d-bf68-4fad-b489-0e83b613c5df" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/geb-testng-example_main.iml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/geb-testng-example_test.iml" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change beforePath="$PROJECT_DIR$/geb-testng-example.iml" afterPath="$PROJECT_DIR$/geb-testng-example.iml" />
-      <change beforePath="$PROJECT_DIR$/geb-testng-example.ipr" afterPath="$PROJECT_DIR$/geb-testng-example.ipr" />
       <change beforePath="$PROJECT_DIR$/geb-testng-example.iws" afterPath="$PROJECT_DIR$/geb-testng-example.iws" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/GebConfig.groovy" afterPath="$PROJECT_DIR$/src/test/resources/GebConfig.groovy" />
     </list>
@@ -87,8 +82,8 @@
       <file leaf-file-name="GebConfig.groovy" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/resources/GebConfig.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+            <state relative-caret-position="450">
+              <caret line="72" column="5" lean-forward="false" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -722,12 +717,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1520170513880</updated>
-      <workItem from="1520170515187" duration="739000" />
+      <workItem from="1520170515187" duration="840000" />
     </task>
+    <task id="LOCAL-00001" summary="version1.1">
+      <created>1520171266874</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1520171266874</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="739000" />
+    <option name="totallyTimeSpent" value="840000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="741" extended-state="6" />
@@ -772,6 +775,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <MESSAGE value="version1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="version1.1" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -789,8 +794,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/GebConfig.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+        <state relative-caret-position="450">
+          <caret line="72" column="5" lean-forward="false" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
