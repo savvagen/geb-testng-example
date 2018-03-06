@@ -289,6 +289,24 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-java-commons/2.6.0/9f58c4bc98788b5e2e22b4b97fd564b9693c9ddd/allure-java-commons-2.6.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Gradle: io.qameta.allure:allure-junit4-aspect:2.0-BETA9">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-junit4-aspect/2.0-BETA9/3cfdda7b35cbb7b0d045fbfd81950873b2ab81fa/allure-junit4-aspect-2.0-BETA9.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-junit4-aspect/2.0-BETA9/83ad65e49e75123134fe0f7aa06c2d509aaca873/allure-junit4-aspect-2.0-BETA9-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.qameta.allure:allure-junit4:2.0-BETA9">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-junit4/2.0-BETA9/f85bf061cfebf7a0cdfba892e660cbc0b3d95d33/allure-junit4-2.0-BETA9.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-junit4/2.0-BETA9/36e948b33d83bffd2f9035cfca89d18349b1bbe6/allure-junit4-2.0-BETA9-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Gradle: io.qameta.allure:allure-spock:2.6.0">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.qameta.allure/allure-spock/2.6.0/29d49cca01923e69db91a1b2733ef8f4011fb3ef/allure-spock-2.6.0.jar!/" />
@@ -794,7 +812,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/xerces/xercesImpl/2.9.1/7bc7e49ddfe4fb5f193ed37ecc96c12292c8ceb6/xercesImpl-2.9.1.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/xerces/xercesImpl/2.9.1/e30837a0843d5ea477b9334efdb730e66ffbd253/xercesImpl-2.9.1-sources.jar!/" />
+      </SOURCES>
     </library>
     <library name="Gradle: xml-apis:xml-apis:1.3.04">
       <CLASSES>

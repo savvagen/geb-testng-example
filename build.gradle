@@ -181,3 +181,14 @@ remoteTest.finalizedBy allureAggregatedReport
     dependsOn drivers.collect { tasks["${it}Test"] }
     enabled = false
 }*/
+
+
+drivers.each { driver ->
+    task "${driver}Spock"(type: Test) {
+        //systemProperty "geb.env", "${driver}"
+        //systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
+        systemProperty "testDriver", "${driver}"
+        systemProperty "test.single", "SpokTests.groovy"
+    }
+}
+drivers.collect { tasks["${it}Spock"].finalizedBy allureAggregatedReport }
